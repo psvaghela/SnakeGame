@@ -94,8 +94,8 @@ def hirelinkedin(techn,file_name):
 
 
     #file_new = "E:\\HR_DB\\" + dt + "\\New\\" + dt + "_" + file_name  # New File
-    file_old = "E:\\HR_DB\\" + dy + "\\" + dy + "_" + file_name   # Old File(yesterday's)
-    file_final = "E:\\HR_DB\\" + dt + "\\" + dt + "_" + file_name # Final file containing unique elements.
+    file_old = "E:\\HR_DB\\" + dy + "\\" + dy + "_" + file_name   ## Old File(yesterday's)
+    file_final = "E:\\HR_DB\\" + dt + "\\" + dt + "_" + file_name   ## Final file containing unique elements.
 
     dic = {'Name':nam, 'Recent-activity Posts':lnk, 'Post Time':pt}
     df1 = pd.DataFrame(dic)

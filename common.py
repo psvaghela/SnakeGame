@@ -101,11 +101,11 @@ def tech_data(kw,file_name):
 
 #Calling Function for all Technologies:
 
-#tech_data("hiring angular developer","angular.csv")
-#tech_data("hiring c++ developer","c++.csv")
+'''tech_data("hiring angular developer","angular.csv")
+tech_data("hiring c++ developer","c++.csv")
 tech_data("hiring flutter developer","flutter.csv")
 tech_data("hiring html developer","html.csv")
-tech_data("hiring java developer","java.csv")
+tech_data("hiring java developer","java.csv")'''
 tech_data("hiring javascript developer","javascript.csv")
 tech_data("hiring laravel developer","laravel.csv")
 tech_data("hiring node developer","node.csv")
