@@ -2,20 +2,26 @@ import os
 import tkinter
 from tkinter import simpledialog
 from datetime import date
+from datetime import timedelta
 
-dt = str(date.today())   # Today's date
-dy = dt.replace(dt[-1],str(int(dt[-1])-1))  # yesterday date
+today = date.today()
+dt = str(today)   # Today's date
+yest = today - timedelta(days=1)  # yesterday dateSEO,digital marketing
+dy = str(yest)
 
 ###### Create New Directory in HR-DB #######
-parent_dir = "E:\HR_DB"
-pathd = os.path.join(parent_dir,dt)
-os.mkdir(pathd)
-'''dir_new = "New"
-dir_final = "Final"
-pathn = os.path.join(pathd,dir_new)
-pathf = os.path.join(pathd,dir_final)
-os.mkdir(pathn)
-os.mkdir(pathf)'''
+try:
+    parent_dir = "E:\\HR_DB"
+    pathd = os.path.join(parent_dir,dt)
+    os.mkdir(pathd)
+    dir_new = "New"
+    dir_final = "Final"
+    pathn = os.path.join(pathd,dir_new)
+    pathf = os.path.join(pathd,dir_final)
+    os.mkdir(pathn)
+    os.mkdir(pathf)
+except:
+    pass
 
 ######## Define Function to Extract data ########
 def hirelinkedin(techn,file_name):
@@ -26,8 +32,9 @@ def hirelinkedin(techn,file_name):
     import time
     import pandas as pd
 
-    driver = webdriver.Chrome("C:\\Users\\Dell\\Downloads\\chromedriver_win32\\chromedriver.exe")
-    url = "https://linkedin.com/uas/login"
+    driver = webdriver.Chrome("C:\\Users\\Dell\\Downloads\\chromedriver_win32 (2)\\chromedriver.exe")
+    #"C:\Users\Dell\Downloads\chromedriver_win32 (1)\chromedriver.exe"
+    url = "https://www.linkedin.com/login"
     driver.get(url)
     time.sleep(5)
     username = driver.find_element(By.ID, "username")
@@ -56,8 +63,8 @@ def hirelinkedin(techn,file_name):
     # For Past 24-hours posts:
 
     s = driver.current_url
-    #recenturl = s.replace('?','?datePosted=%22past-week%22&') # Last week posts
-    recenturl = s.replace('?','?datePosted=%22past-24h%22&')
+    recenturl = s.replace('?','?datePosted=%22past-week%22&') # Last week posts
+    #recenturl = s.replace('?','?datePosted=%22past-24h%22&')
     driver.get(recenturl)
     time.sleep(5)
 
@@ -93,17 +100,22 @@ def hirelinkedin(techn,file_name):
         last_height = new_height
 
 
-    #file_new = "E:\\HR_DB\\" + dt + "\\New\\" + dt + "_" + file_name  # New File
-    file_old = "E:\\HR_DB\\" + dy + "\\" + dy + "_" + file_name   ## Old File(yesterday's)
-    file_final = "E:\\HR_DB\\" + dt + "\\" + dt + "_" + file_name   ## Final file containing unique elements.
+    file_new = "E:\\HR_DB\\" + dt + "\\New\\" + dt + "_" + file_name  # New File
+    file_old = "E:\\HR_DB\\" + dy + "\\New\\" + dy + "_" + file_name   ## Old File(yesterday's)
+    file_final = "E:\\HR_DB\\" + dt + "\\Final\\" + dt + "_" + file_name   ## Final file containing unique elements.
 
     dic = {'Name':nam, 'Recent-activity Posts':lnk, 'Post Time':pt}
     df1 = pd.DataFrame(dic)
     df1.drop_duplicates(inplace=True)
-    df2 = pd.read_csv(file_old)
-    df3 = df1.merge(df2, how = 'outer' ,indicator=True).loc[lambda x : x['_merge']=='left_only'] # Taking Data which is in df1 but not in df2
-    df3.to_csv(file_final, header=True, index=False)  # Final CSV
-    #df1.to_csv(file_new, header=True, index=False)   # New CSV(24-hrs data)
+    try:
+        df2 = pd.read_csv(file_old)
+        df3 = df1.merge(df2, how = 'left' ,indicator=True)  #.loc[lambda x : x['_merge']=='left_only'] # Taking Data which is in df1 but not in df2
+        df3.to_csv(file_final, header=True, index=False)  # Final CSV
+        df1.to_csv(file_new, header=True, index=False)   # New CSV(24-hrs data)
+    except FileNotFoundError:
+        df1.to_csv(file_final, header=True, index=False)   # New CSV(24-hrs data)
+        df1.to_csv(file_new, header=True, index=False)   # New CSV(24-hrs data)
+
 
     time.sleep(5)
     driver.close()
@@ -115,9 +127,11 @@ def hirelinkedin(techn,file_name):
 ###### Make GUI to take input from the user #########
 window = tkinter.Tk()
 window.withdraw()
-
+tdef = "laravel,wordpress,magento,node,flutter,MERN,react,UIUX,web designing,android,ios,SEO,digital marketing"
 techs = simpledialog.askstring(title="Technologies List",prompt="Enter Technologies Separated by Comma:")
-techl = techs.split(',')
+if techs=='':
+    techs = tdef
+techl = str(techs).split(',')
 
 ####### Call finction for all technologies in the input #######
 for x in techl:

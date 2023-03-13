@@ -1,19 +1,27 @@
-import pygame
+import numpy as np
+import pandas as pd
 
-pygame.init()
-#color = (255,255,255)
-position = (0,0)
+df = pd.read_excel("F:\\down\\TDS_Week_5_Dataset_2.xlsx")
+M = np.array(df)
 
-scr = pygame.display.set_mode((1000,700))
-pygame.display.set_caption("Nice One")
+def kmeans(X, K, max_iters):
+    # Initialize centroids randomly
+    centroids = X[np.random.choice(range(len(X)), K), :]
+    
+    for i in range(max_iters):
+        # Assign each data point to its closest centroid
+        C = np.argmin(np.sqrt(np.sum((X - centroids[:, np.newaxis])**2, axis=2)), axis=0)
+        
+        # Update centroids to be the mean of the assigned data points
+        for k in range(K):
+            centroids[k] = np.mean(X[C == k], axis=0)
+            
+    return centroids
 
-
-image = pygame.image.load("C:\\Users\\Dell\\Pictures\\Screenshots\\Screenshot (828).png")
-exit = False
-while not exit:
-    #scr.fill(color)
-    scr.blit(image,dest=position)
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            exit = True
-    pygame.display.update()
+check = 30
+x = kmeans(M,7,30)
+print(x)
+for i in range(7):
+    for j in range(len(x[i])):
+        if abs(x[i][j]-604)<=check and abs(x[i][j]-1173)<=check:
+            print(True)

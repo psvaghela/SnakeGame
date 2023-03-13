@@ -16,8 +16,8 @@ def tech_data(kw,file_name):
     dt = []
 
     # Assign Different Paths for Files
-    path_old = "E:\\TECH_DB\\" + "2022-07-18" + "\\" + file_name  # Yesterday
-    path_file = "E:\\TECH_DB\\" + "2022-07-19" + "\\" + file_name  # New posts that are increased Today than yesterday
+    #path_old = "E:\\TECH_DB\\" + "2022-07-18" + "\\" + file_name  # Yesterday
+    path_file = "E:\\TECH_DB\\" + "2022-07-21" + "\\" + file_name  # New posts that are increased Today than yesterday
     
     driver = webdriver.Chrome("C:\\Users\\Dell\\Downloads\\chromedriver_win32\\chromedriver.exe")
     url = "https://linkedin.com/uas/login"
@@ -105,8 +105,8 @@ def tech_data(kw,file_name):
 tech_data("hiring c++ developer","c++.csv")
 tech_data("hiring flutter developer","flutter.csv")
 tech_data("hiring html developer","html.csv")
-tech_data("hiring java developer","java.csv")'''
-tech_data("hiring javascript developer","javascript.csv")
+tech_data("hiring java developer","java.csv")
+tech_data("hiring javascript developer","javascript.csv")'''
 tech_data("hiring laravel developer","laravel.csv")
 tech_data("hiring node developer","node.csv")
 tech_data("hiring python developer","python.csv")
@@ -127,7 +127,7 @@ files_list = ['angular.csv','c++.csv','flutter.csv','html.csv','java.csv','javas
 'react.csv','sql.csv','wordpress.csv']
 
 for file_name in files_list:
-    path_count = "E:\\TECH_DB\\2022-07-19\\" + file_name
+    path_count = "E:\\TECH_DB\\2022-07-21\\" + file_name
     df = pd.read_csv(path_count)
     l = len(df)
     list1.append(l)
