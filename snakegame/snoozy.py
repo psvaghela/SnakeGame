@@ -15,11 +15,11 @@ screen_height = 500
 # Create Game Window
 gwindow = pygame.display.set_mode((screen_length,screen_height))
 
-bgimg = pygame.image.load('E:\\PSV_vs\\snakegame\\gamebg.jpeg')
+bgimg = pygame.image.load('gamebg.jpeg')
 bgimg = pygame.transform.scale(bgimg, (screen_length,screen_height)).convert_alpha()
-startimg = pygame.image.load('E:\\PSV_vs\\snakegame\\start.jpeg')
+startimg = pygame.image.load('start.jpeg')
 startimg = pygame.transform.scale(startimg, (screen_length,screen_height)).convert_alpha()
-overimg = pygame.image.load('E:\\PSV_vs\\snakegame\\overbg.jpeg')
+overimg = pygame.image.load('overbg.jpeg')
 overimg = pygame.transform.scale(overimg, (screen_length,screen_height)).convert_alpha()
 
 pygame.display.set_caption("Snoozy")
@@ -52,7 +52,7 @@ def welcomescreen():
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    mixer.music.load('E:\\PSV_vs\\snakegame\\gmusic.mp3',)
+                    mixer.music.load('gmusic.mp3',)
                     mixer.music.play(loops=-1)
                     mygame()
             if event.type == pygame.QUIT:
@@ -69,7 +69,7 @@ def mygame():
     snake_y = 50
     vel_x = 0
     vel_y = 0
-    with open("E:\\PSV_vs\\snakegame\\highscore.txt", "r") as f:
+    with open("highscore.txt", "r") as f:
         hscore = f.read()
 
     snk_list = []
@@ -82,7 +82,7 @@ def mygame():
     while not game_exit:
         if game_over:
             
-            with open("E:\\PSV_vs\\snakegame\\highscore.txt", "w") as f:
+            with open("highscore.txt", "w") as f:
                 f.write(str(hscore))
 
             gwindow.fill(white)
@@ -92,7 +92,7 @@ def mygame():
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RETURN:
-                        mixer.music.load('E:\\PSV_vs\\snakegame\\gmusic.mp3',)
+                        mixer.music.load('gmusic.mp3',)
                         mixer.music.play(loops=-1)
                         mygame()
                 if event.type == pygame.QUIT:
@@ -154,12 +154,12 @@ def mygame():
 
             if snake_x>screen_length or snake_x<0 or snake_y>screen_height or snake_y<0:
                 game_over = True
-                pygame.mixer.music.load('E:\\PSV_vs\\snakegame\\govermusic.wav')
+                pygame.mixer.music.load('govermusic.wav')
                 pygame.mixer.music.play()
             
             if head in snk_list[:-1]:
                 game_over = True
-                pygame.mixer.music.load('E:\\PSV_vs\\snakegame\\govermusic.wav')
+                pygame.mixer.music.load('govermusic.wav')
                 pygame.mixer.music.play()
             
 

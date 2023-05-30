@@ -5,7 +5,6 @@ from csv import writer
 url = "https://www.imdb.com/chart/top/"
 source = requests.get(url)
 
-#print(source)
 
 soup = BeautifulSoup(source.content,'lxml')
 movies = soup.find_all('tr')

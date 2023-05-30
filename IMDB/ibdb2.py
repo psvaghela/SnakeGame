@@ -11,6 +11,7 @@ source = requests.get(url)
 #print(source)
 soup = BeautifulSoup(source.content,'lxml')
 movies = soup.find_all('tr')
+print(movies)
 for movie in movies:
     t = movie.find("td",{'class':"titleColumn"})
     if(t!=None):
